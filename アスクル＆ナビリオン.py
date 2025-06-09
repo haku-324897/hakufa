@@ -127,15 +127,6 @@ def get_giftechs_product_info(session, product_code):
     }
     session.headers.update(headers)
 
-    # 1. 契約者ディレクトリのトップページにアクセス
-    top_url = f"https://www.ntps-shop.com/shop/wellstech/"
-    try:
-        # セッションを使い回しているので、ここでのアクセスは不要な場合が多いですが、念のため残します。
-        # get_product_urls_from_janが必ず先に呼ばれる前提であれば削除可能です。
-        session.get(top_url)
-        time.sleep(0.5) # NTPS-shop トップページへの接続後に遅延 (重複する場合あり)
-    except requests.exceptions.RequestException:
-        return {} # エラー時は空辞書を返す
 
     # 2. 商品ページにアクセス
     product_url = f"https://www.ntps-shop.com/product/{product_code}/"
